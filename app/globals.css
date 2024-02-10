@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #F5F5F5;
+  color: #222222;
+}
+
+.custom-container {
+  max-width: 90%;
+  margin: 0px auto;
+}
+
+@media screen and (min-width: 768px) {
+  .custom-container {
+    max-width: 650px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .custom-container {
+    max-width: 950px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .custom-container {
+    max-width: 1260px;
+  }
+}
+
+@media screen and (min-width: 1660px) {
+  .custom-container {
+    max-width: 1440px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
