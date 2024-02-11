@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/banner.jsx"
+    "components/carousel.jsx"
   ],
   "exclude": [
     "node_modules"
