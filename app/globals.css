@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-color: #F5F5F5;
+  background-color: white;
   color: #222222;
 }
 
@@ -18,15 +18,27 @@ body {
   }
 }
 
+@media screen and (min-width: 850px) {
+  .custom-container {
+    max-width: 800px;
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .custom-container {
     max-width: 950px;
   }
 }
 
+@media screen and (min-width: 1330px) {
+  .custom-container {
+    max-width: 1200px;
+  }
+}
+
 @media screen and (min-width: 1440px) {
   .custom-container {
-    max-width: 1260px;
+    max-width: 1350px;
   }
 }
 
@@ -40,4 +52,59 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Slider Styles */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.autoplay-progress {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--swiper-theme-color);
+}
+
+.autoplay-progress svg {
+  --progress: 0;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  stroke-width: 4px;
+  stroke: var(--swiper-theme-color);
+  fill: none;
+  stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+  stroke-dasharray: 125.6;
+  transform: rotate(-90deg);
 }

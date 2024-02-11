@@ -1,7 +1,13 @@
+import Banner from "@/components/banner";
+import Header from "@/components/header";
+
 export default function Home() {
   return (
-    <div className="custom-container">
-
-    </div>
+    <>
+      <Header />
+      <div className="custom-container">
+        <Banner />
+      </div>
+    </>
   );
 }
