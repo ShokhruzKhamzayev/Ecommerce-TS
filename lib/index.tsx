@@ -1,4 +1,4 @@
-import { BannerData, CateMain, DetailedProductI } from "@/types";
+import { BannerData, BrandItem, CateMain, DetailedProductI, MostWantedList } from "@/types";
 import { GraphQLClient, gql } from "graphql-request";
 
 const gqlClient = new GraphQLClient(process.env.HYGRAPHQL_ENDPOINT as string)
@@ -39,22 +39,22 @@ export async function fetchBanner() {
 export async function fetchDetailedProduct() {
     const query = gql`
         query DetailedProduct {
-            categories(where: {slug: "mobile"}, first: 5) {
-                products {
-                title
-                slug
-                quan
-                rate
-                price
-                details
-                categorySlug
-                images {
-                    url
+            categories(where: {slug: "mobile"}) {
+                products(first:5) {
+                    title
+                    slug
+                    quan
+                    rate
+                    price
+                    details
+                    categorySlug
+                    images {
+                        url
+                    }
+                    discount {
+                        discount
+                    }
                 }
-                discount {
-                    discount
-                }
-            }
             }
         }
     `
@@ -63,13 +63,47 @@ export async function fetchDetailedProduct() {
     return detailedProd
 }
 
-// mostWanted {
-//                 image {
-//         url
-//     }
-//     nameWanted
-//     slug
-//                 discount {
-//         discount
-//     }
-// }
+export function MostWanteds() {
+    const query = gql`
+    query DetailedProduct {
+        mostWanteds(first: 6) {
+            slug
+            nameWanted
+            discount {
+            discount
+            }
+            image{
+            url
+            }
+        }
+    }
+    `
+    const mostWanteds = gqlClient.request<MostWantedList>(query)
+    return mostWanteds
+}
+
+export async function fetchAllBrands() {
+    const query = gql`
+        query MyQuery {
+            brands {
+                nameBrand
+                slug
+                logo {
+                url
+                }
+                bgColor {
+                hex
+                }
+                exampleProduct {
+                url
+                }
+                discount {
+                discount
+                }
+            }
+        }
+    `
+
+    const companyBrands = await gqlClient.request<BrandItem[]>(query)
+    return companyBrands
+}

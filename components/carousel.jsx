@@ -16,7 +16,6 @@ export default function Carousel({ banner }) {
   useEffect(() => {
     setBannerData(banner)
   }, [])
-  console.log(bannerData)
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const onAutoplayTimeLeft = (s, time, progress) => {

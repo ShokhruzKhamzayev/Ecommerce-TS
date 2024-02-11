@@ -44,11 +44,33 @@ interface MostWantedSingle {
     }
 }
 
-export interface DetailedProductI {
-    category: {
-        products: Product[]
-        mostWanted: MostWantedSingle[]
+export interface BrandItem {
+    nameBrand: string,
+    slug: string,
+    logo: {
+        url: string
+    },
+    bgColor: {
+        hex: string
+    },
+    exampleProduct: {
+        url: string
+    },
+    discount: {
+        discount: number
     }
+}
+
+export interface MostWantedList {
+    mostWanteds: MostWantedSingle[]
+}
+
+interface Products {
+    products: Product[]
+}
+
+export interface DetailedProductI {
+    categories: Products[]
 }
 
 export interface BannerData {

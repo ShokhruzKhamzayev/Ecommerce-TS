@@ -1,4 +1,4 @@
-import { fetchDetailedProduct } from "@/lib"
+import { MostWanteds, fetchDetailedProduct } from "@/lib"
 import Image from "next/image"
 import Link from "next/link"
 import { FaChevronRight } from "react-icons/fa6"
@@ -10,12 +10,10 @@ export default async function EntryCard({ simpleTitle, coloredTitle, nameCategor
   nameCategory: string,
   daily: boolean
 }) {
-  const { categories } = await fetchDetailedProduct()
+  const detailedProd = await fetchDetailedProduct()
+  const { mostWanteds } = await MostWanteds()
+  const { categories } = detailedProd
   const { products } = categories[0]
-  console.log(products)
-  // const { products } = category
-  // const { mostWanted } = category
-
   return (
     <div>
       <div className="starter">
@@ -30,13 +28,18 @@ export default async function EntryCard({ simpleTitle, coloredTitle, nameCategor
           <FaChevronRight />
         </Link>
       </div>
-      <div className="wrapper-content grid grid-cols-1 lg:grid-cols-5 gap-x-[16px] gap-y-[20px]">
+      <div className="wrapper-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-x-[16px] gap-y-[20px]">
         {
           daily ? (
             <>
-              {/* {
-                mostWanted.map((item, index) => (
-                  <div key={index} className="mt-[15px]">
+              {
+                mostWanteds.map((item, index) => (
+                  <Link href={{
+                    pathname: `/product/${item.slug}`,
+                    query: {
+                      slug: item.slug
+                    }
+                  }} key={index} className="mt-[15px]">
                     <div className="bg-[#EDEDED] py-[20px] rounded-[16px]">
                       <div className="img-container relative w-full h-[200px]">
                         <CustomImage src={item.image.url} alt={item.nameWanted} />
@@ -44,18 +47,30 @@ export default async function EntryCard({ simpleTitle, coloredTitle, nameCategor
                     </div>
                     <div className="info relative text-center ">
                       <h2 className="text-[20px] text-[#666666] mt-[20px]">{item.nameWanted}</h2>
-                      <h3 className="text-[20px] font-bold">UP to {item.discount.discount}% OFF</h3>
+                      <h3 className="text-[20px] font-bold">
+                        {
+                          item?.discount?.discount > 0 ? (
+                            <p>UP to {item?.discount?.discount}% OFF</p>
+                          ) : (
+                            <p>No OFF's yet</p>
+                          )
+                        }
+                      </h3>
                     </div>
-                  </div>
+                  </Link>
                 ))
-              } */}
-              <h1>123123</h1>
+              }
             </>
           ) : (
             <>
               {
                 products.map((item, index) => (
-                  <div key={index} className="mt-[15px] border rounded-[16px]">
+                  <Link href={{
+                    pathname: `/product/${item.slug}`,
+                    query: {
+                      slug: item.slug
+                    }
+                  }} key={index} className="mt-[15px] border rounded-[16px]">
                     <div className="bg-[#EDEDED] rounded-t-[16px] py-[12px] relative">
                       <div className="flex flex-col bg-[#008ECC] w-[51px] absolute right-0 top-0 rounded-[0px_12px_0px_12px] z-10 text-white justify-center items-center p-[10px]">
                         <span>{item?.discount?.discount}%</span>
@@ -68,14 +83,30 @@ export default async function EntryCard({ simpleTitle, coloredTitle, nameCategor
                     <div className="p-[12px]">
                       <h1 className="font-bold ">{item.title}</h1>
                       <div className="flex gap-[12px] border-b border-[#EDEDED] pb-[10px]">
-                        <h2>${Math.floor(item.price - item.price / 100 * item?.discount?.discount)}</h2>
-                        <h2 className="line-through text-gray-400">${item.price}</h2>
+                        {
+                          item?.discount?.discount > 0 ? (
+                            <>
+                              <h2>${Math.floor(item.price - item.price / 100 * item?.discount?.discount)}</h2>
+                              <h2 className="line-through text-gray-400">${item.price}</h2>
+                            </>
+                          ) : (
+                            <h2 className="line-through text-gray-400">${item.price}</h2>
+                          )
+                        }
                       </div>
                     </div>
                     <div className="pl-[12px] pb-[12px]">
-                      <h3 className="text-[#249B3E] font-bold ">Save - ${Math.floor(item.price / 100 * item?.discount?.discount)}</h3>
+                      <h3 className="text-[#249B3E] font-bold "> Save - $
+                        {
+                          item?.discount?.discount > 0 ? (
+                            Math.floor(item.price / 100 * item?.discount?.discount)
+                          ) : (
+                            'No savings yet'
+                          )
+
+                        }</h3>
                     </div>
-                  </div>
+                  </Link>
                 ))
               }
             </>
@@ -85,3 +116,4 @@ export default async function EntryCard({ simpleTitle, coloredTitle, nameCategor
     </div>
   )
 }
+// 
