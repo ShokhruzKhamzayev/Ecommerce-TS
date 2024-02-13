@@ -24,7 +24,7 @@ export default async function EntryCard({ simpleTitle, coloredTitle, nameCategor
           query: {
             slug: nameCategory
           }
-        }} className="flex items-center gap-[7px]">
+        }} className="flex items-center gap-[7px] text-center">
           View all
           <FaChevronRight />
         </Link>

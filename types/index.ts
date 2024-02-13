@@ -24,9 +24,23 @@ export interface Product {
     details: string,
     categorySlug: string,
     images: url[],
+    feedback: number
     discount: {
         discount: number
     }
+    brand: {
+        nameBrand: string,
+        slug: string
+    }
+    category: {
+        label: string
+        slug: string
+    }
+}
+
+export interface SpecificProduct {
+    product: Product,
+    
 }
 
 interface url {

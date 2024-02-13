@@ -41,15 +41,15 @@ export default function Carousel({ banner }) {
       >
         {
           banner.map((bn, index) => (
-            <SwiperSlide key={index} className='relative'>
+            <SwiperSlide key={index}>
               <Link href={{
                 pathname: `/category/${bn.slug}`,
                 query: {
                   slug: bn.slug
                 }
-              }}>
-                <div>
-                  <Image src={bn.image.url} alt='banner' fill priority={true}/>
+              }} className='w-full'>
+                <div className='relative h-[340px] min-w-[300px] w-[100%]'>
+                  <Image src={bn.image.url} alt='banner' fill priority={true} />
                 </div>
               </Link>
             </SwiperSlide>

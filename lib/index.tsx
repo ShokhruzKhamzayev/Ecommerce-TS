@@ -1,4 +1,4 @@
-import { ALlBrandProducts, BannerData, BrandItem, CateMain, DetailedProductI, MostWantedList } from "@/types";
+import { ALlBrandProducts, BannerData, BrandItem, CateMain, DetailedProductI, MostWantedList, SpecificProduct } from "@/types";
 import { GraphQLClient, gql } from "graphql-request";
 
 const gqlClient = new GraphQLClient(process.env.HYGRAPHQL_ENDPOINT as string)
@@ -70,10 +70,8 @@ export async function fetchALlProductsCategory(slug: string) {
                 products {
                 title
                 slug
-                quan
                 rate
                 price
-                details
                 images {
                     url
                 }
@@ -141,10 +139,8 @@ export async function fetchProductsBrand(slug: string) {
             product {
                 title
                 slug
-                quan
                 rate
                 price
-                details
                 images {
                     url
                 }
@@ -158,4 +154,37 @@ export async function fetchProductsBrand(slug: string) {
 
     const brandData = await gqlClient.request<ALlBrandProducts>(query)
     return brandData
+}
+
+export async function fetchSpecificProduct(slug: string) {
+    const query = gql`
+    query MyQuery {
+        product(where: {slug: "${slug}"}) {
+                    title
+                    slug
+                    quan
+                    rate
+                    price
+                    details
+                    images {
+                        url
+                    }
+                    discount {
+                        discount
+                    }
+                    brand {
+                    nameBrand
+                    slug
+                    }
+                    category {
+                    label
+                    slug
+                    }
+                    feedback
+                }
+        }
+    `
+
+    const fullProduct = await gqlClient.request<SpecificProduct>(query)
+    return fullProduct
 }

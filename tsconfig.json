@@ -33,7 +33,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "components/carousel.jsx"
-  ],
+, "components/thumbGalery.jsx"  ],
   "exclude": [
     "node_modules"
   ]
