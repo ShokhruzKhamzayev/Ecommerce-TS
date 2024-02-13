@@ -1,5 +1,5 @@
 import Banner from "@/components/banner";
-import Brand from "@/components/Brand.1";
+import Brand from "@/components/brandSlide";
 import Category from "@/components/category";
 import EntryCard from "@/components/entryCat";
 

@@ -1,4 +1,4 @@
-import { BannerData, BrandItem, CateMain, DetailedProductI, MostWantedList } from "@/types";
+import { ALlBrandProducts, BannerData, BrandItem, CateMain, DetailedProductI, MostWantedList } from "@/types";
 import { GraphQLClient, gql } from "graphql-request";
 
 const gqlClient = new GraphQLClient(process.env.HYGRAPHQL_ENDPOINT as string)
@@ -63,9 +63,35 @@ export async function fetchDetailedProduct() {
     return detailedProd
 }
 
+export async function fetchALlProductsCategory(slug: string) {
+    const allCategoryProducts = gql`
+        query CategoryProducts {
+            categories(where: {slug: "${slug}"}) {
+                products {
+                title
+                slug
+                quan
+                rate
+                price
+                details
+                images {
+                    url
+                }
+                discount {
+                    discount
+                }
+                }
+            }
+        }
+    `
+
+    const categoryProducts = await gqlClient.request<DetailedProductI>(allCategoryProducts)
+    return categoryProducts
+}
+
 export function MostWanteds() {
     const query = gql`
-    query DetailedProduct {
+    query DetailedCategoryProduc {
         mostWanteds(first: 6) {
             slug
             nameWanted
@@ -106,4 +132,30 @@ export async function fetchAllBrands() {
 
     const companyBrands = await gqlClient.request<BrandItem[]>(query)
     return companyBrands
+}
+
+export async function fetchProductsBrand(slug: string) {
+    const query = gql`
+    query Brand {
+        brand(where: {slug: "${slug}"}) {
+            product {
+                title
+                slug
+                quan
+                rate
+                price
+                details
+                images {
+                    url
+                }
+                discount {
+                    discount
+                }
+            }
+        }
+    }
+    `
+
+    const brandData = await gqlClient.request<ALlBrandProducts>(query)
+    return brandData
 }

@@ -15,7 +15,7 @@ interface BannerMap {
     }
 }
 
-interface Product {
+export interface Product {
     title: string,
     slug: string,
     quan: number,
@@ -67,6 +67,14 @@ export interface MostWantedList {
 
 interface Products {
     products: Product[]
+}
+
+interface ProductBrandType {
+    product: Product[]
+}
+
+export interface ALlBrandProducts {
+    brand: ProductBrandType
 }
 
 export interface DetailedProductI {

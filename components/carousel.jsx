@@ -49,7 +49,7 @@ export default function Carousel({ banner }) {
                 }
               }}>
                 <div>
-                  <Image src={bn.image.url} alt='banner' fill />
+                  <Image src={bn.image.url} alt='banner' fill priority={true}/>
                 </div>
               </Link>
             </SwiperSlide>

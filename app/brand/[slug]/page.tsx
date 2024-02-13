@@ -1,5 +1,6 @@
-export default function DetailedBrand() {
+
+export default function SpecificBrandPage() {
   return (
-    <div>DetailedBrand</div>
+    <div>SpecificBrandPage</div>
   )
 }

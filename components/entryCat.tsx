@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { FaChevronRight } from "react-icons/fa6"
 import CustomImage from "./customImage"
+import ProductPreview from "./productPreview"
 
 export default async function EntryCard({ simpleTitle, coloredTitle, nameCategory, daily }: {
   simpleTitle: string,
@@ -28,14 +29,14 @@ export default async function EntryCard({ simpleTitle, coloredTitle, nameCategor
           <FaChevronRight />
         </Link>
       </div>
-      <div className="wrapper-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-x-[16px] gap-y-[20px]">
+      <div className="wrapper-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-x-[16px] gap-y-[20px] py-[10px]">
         {
           daily ? (
             <>
               {
                 mostWanteds.map((item, index) => (
                   <Link href={{
-                    pathname: `/product/${item.slug}`,
+                    pathname: `/category/${item.slug}`,
                     query: {
                       slug: item.slug
                     }
@@ -63,52 +64,7 @@ export default async function EntryCard({ simpleTitle, coloredTitle, nameCategor
             </>
           ) : (
             <>
-              {
-                products.map((item, index) => (
-                  <Link href={{
-                    pathname: `/product/${item.slug}`,
-                    query: {
-                      slug: item.slug
-                    }
-                  }} key={index} className="mt-[15px] border rounded-[16px]">
-                    <div className="bg-[#EDEDED] rounded-t-[16px] py-[12px] relative">
-                      <div className="flex flex-col bg-[#008ECC] w-[51px] absolute right-0 top-0 rounded-[0px_12px_0px_12px] z-10 text-white justify-center items-center p-[10px]">
-                        <span>{item?.discount?.discount}%</span>
-                        <span>OFF</span>
-                      </div>
-                      <div className="img-container relative w-full h-[220px]">
-                        <CustomImage src={item.images[0].url} alt={item.title} />
-                      </div>
-                    </div>
-                    <div className="p-[12px]">
-                      <h1 className="font-bold ">{item.title}</h1>
-                      <div className="flex gap-[12px] border-b border-[#EDEDED] pb-[10px]">
-                        {
-                          item?.discount?.discount > 0 ? (
-                            <>
-                              <h2>${Math.floor(item.price - item.price / 100 * item?.discount?.discount)}</h2>
-                              <h2 className="line-through text-gray-400">${item.price}</h2>
-                            </>
-                          ) : (
-                            <h2 className="line-through text-gray-400">${item.price}</h2>
-                          )
-                        }
-                      </div>
-                    </div>
-                    <div className="pl-[12px] pb-[12px]">
-                      <h3 className="text-[#249B3E] font-bold "> Save - $
-                        {
-                          item?.discount?.discount > 0 ? (
-                            Math.floor(item.price / 100 * item?.discount?.discount)
-                          ) : (
-                            'No savings yet'
-                          )
-
-                        }</h3>
-                    </div>
-                  </Link>
-                ))
-              }
+              <ProductPreview products={products}/>
             </>
           )
         }

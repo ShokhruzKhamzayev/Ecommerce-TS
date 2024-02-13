@@ -1,46 +1,65 @@
 'use client'
+
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import './carouselMini.css'
+
 
 import { Pagination, Autoplay } from 'swiper/modules';
-import { BrandItem } from '@/types';
 import CustomImage from './customImage';
 import Link from 'next/link';
+import { BrandItem } from '@/types';
 
-export default function MiniCarousel({ brands }: {
+export default function App({ brands }: {
     brands: BrandItem[]
 }) {
     return (
         <>
             <Swiper
-                slidesPerView={3}
-                spaceBetween={30}
+                slidesPerView={1}
+                spaceBetween={10}
                 pagination={{
                     clickable: true,
                 }}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false
+                }}
+                breakpoints={{
+                    640: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 1,
+                        spaceBetween: 30,
+                    },
+                    1024: {
+                        slidesPerView: 2,
+                        spaceBetween: 40,
+                    },
+                    1320: {
+                        slidesPerView: 3,
+                        spaceBetween: 50
+                    }
+                }}
                 modules={[Pagination, Autoplay]}
                 className="mySwiper"
-                autoplay={{
-                    delay: 3500,
-                    disableOnInteraction: false,
-                }}
             >
                 {
                     brands.map((brand, index) => (
-                        <SwiperSlide className='swiper-custom' key={index}>
+                        <SwiperSlide className='swiper-custom' key={index} style={{ backgroundColor: brand.bgColor.hex, borderRadius: 20 }}>
                             <Link href={{
-                                pathname: `/category/${brand.slug}`,
+                                pathname: `/brand/${brand.slug}`,
                                 query: {
                                     slug: brand.slug
                                 }
-                            }} className={`bg-[${brand.bgColor.hex}] flex justify-between items-center w-full h-full`}>
-                                <div className={brand.nameBrand === "APPLE" ? "text-white" : "text-inherit"}>
-                                    <span>{brand.nameBrand}</span>
-                                    <div className={`relative ${brand.nameBrand === 'REALME' ? 'min-w-[200px]' : 'w-[80px]'} ${brand.nameBrand === 'APPLE' ? ' h-[200px]' : ' h-[60px]'}`}>
+                            }} className={'flex w-full h-full items-center px-[15px]'}>
+                                <div className={`swiper-custom ${brand.nameBrand === 'REALME' ? 'text-black' : 'text-white'} flex flex-col h-[100%] justify-between py-[40px] w-[60%] text-left`}>
+                                    <span className='border border-gray-500 w-fit py-[15px] px-[25px] rounded-[12px]'>{brand.nameBrand}</span>
+                                    <div className={`relative ${brand.nameBrand === 'REALME' ? 'min-w-[200px]' : 'w-[90px]'} ${brand.slug === 'apple' ? ' h-[80px]' : ' h-[60px]'}`}>
                                         <CustomImage src={brand.logo.url} alt={`Logo of brand ${brand.nameBrand}`} />
                                     </div>
                                     {
@@ -52,7 +71,7 @@ export default function MiniCarousel({ brands }: {
                                     }
                                 </div>
                                 <div>
-                                    <div className='relative w-[250px] h-[300px]'>
+                                    <div className='relative w-[180px] h-[230px]'>
                                         <CustomImage src={brand.exampleProduct.url} alt={brand.nameBrand} />
                                     </div>
                                 </div>
