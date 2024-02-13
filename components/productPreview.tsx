@@ -27,7 +27,7 @@ export default function ProductPreview({ products }: {
                                         </div>
                                     </>
                                 ) : (
-                                    ''
+                                    <span></span>
                                 )
                             }
 
@@ -56,7 +56,7 @@ export default function ProductPreview({ products }: {
                                     item?.discount?.discount > 0 ? (
                                         `$${Math.floor(item.price / 100 * item?.discount?.discount)} save now`
                                     ) : (
-                                        'No savings yet'
+                                        <span>No savings yet</span>
                                     )
 
                                 }

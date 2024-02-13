@@ -66,7 +66,7 @@ export default function App({ brands }: {
                                         brand?.discount?.discount > 0 ? (
                                             <p>UP to {brand?.discount?.discount}% OFF</p>
                                         ) : (
-                                            <p>No OFF's yet</p>
+                                            <p>No OFF&quot;s yet</p>
                                         )
                                     }
                                 </div>

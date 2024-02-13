@@ -76,7 +76,7 @@ export default async function DetailedProduct({ searchParams }: {
                                 product?.discount?.discount > 0 ? (
                                     `$${Math.floor(product.price / 100 * product?.discount?.discount)} save now`
                                 ) : (
-                                    ''
+                                    <span></span>
                                 )
 
                             }

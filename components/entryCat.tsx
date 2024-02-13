@@ -53,7 +53,7 @@ export default async function EntryCard({ simpleTitle, coloredTitle, nameCategor
                           item?.discount?.discount > 0 ? (
                             <p>UP to {item?.discount?.discount}% OFF</p>
                           ) : (
-                            <p>No OFF's yet</p>
+                            <p>No OFF&quot;s yet</p>
                           )
                         }
                       </h3>
