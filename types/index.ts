@@ -23,7 +23,7 @@ export interface Product {
     price: number,
     details: string,
     categorySlug: string,
-    images: url[],
+    images: Url[],
     feedback: number
     discount: {
         discount: number
@@ -43,7 +43,7 @@ export interface SpecificProduct {
     
 }
 
-interface url {
+export interface Url {
     url: string
 }
 

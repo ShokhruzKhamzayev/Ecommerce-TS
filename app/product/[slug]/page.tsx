@@ -1,6 +1,8 @@
+import CarouselProduct from "@/components/carouselProduct"
 import CustomImage from "@/components/customImage"
 import ReactStarsManual from "@/components/stars"
 import { fetchSpecificProduct } from "@/lib"
+import { Url } from "next/dist/shared/lib/router/router"
 import Link from "next/link"
 import { FaHeart } from "react-icons/fa"
 import { FaCartPlus } from "react-icons/fa6"
@@ -17,7 +19,7 @@ export default async function DetailedProduct({ searchParams }: {
         <div className="custom-container">
             <div className="flex flex-col gap-[20px] lg:flex-row justify-between items-center">
                 <div className="relative w-[100%] h-[300px] lg:w-[50%] lg:h-[450px]  overflow-hidden">
-                    <CustomImage src={images[0].url} alt={product.title} />
+                    <CarouselProduct images={product.images as any} />
                 </div>
                 <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <div className="flex items-center gap-[10px]">
@@ -67,7 +69,7 @@ export default async function DetailedProduct({ searchParams }: {
                             }
                         </span>
                         <button className="rounded-full w-[50px] h-[50px] bg-gray-200 border-0  flex items-center justify-center text-gray-500">
-                            <FaCartPlus size={23} color="#008ECC"/>
+                            <FaCartPlus size={23} color="#008ECC" />
                         </button>
                     </div>
                     <div>

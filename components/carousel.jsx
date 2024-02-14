@@ -49,7 +49,7 @@ export default function Carousel({ banner }) {
                 }
               }} className='w-full'>
                 <div className='relative h-[340px] min-w-[300px] w-[100%]'>
-                  <Image src={bn.image.url} alt='banner' fill priority={true} />
+                  <Image src={bn.image.url} alt='banner' fill priority={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 </div>
               </Link>
             </SwiperSlide>
