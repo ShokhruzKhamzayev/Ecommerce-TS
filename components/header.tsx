@@ -3,8 +3,11 @@ import { FaTruck, FaRegUser } from "react-icons/fa";
 import { TbDiscountCheckFilled } from "react-icons/tb";
 import Link from "next/link";
 import Category from "./category";
+import { UserButton, auth } from '@clerk/nextjs'
 
 export default function Header() {
+    const { userId } = auth()
+
     return (
         <div>
             <div className="till-header bg-[#F5F5F5] py-[14px] hidden lg:block">
@@ -40,10 +43,16 @@ export default function Header() {
                                 </label>
                             </div>
                             <div className="login-cart flex items-center divide-x-[1px] divide-[#D9D9D9] gap-[5px] md:gap-[20px]">
-                                <Link href={'/'} className="flex items-center gap-[6px]">
-                                    <FaRegUser size={16} color="#008ECC" />
-                                    <span className="text-[#666666] text-[13px] md:text-[14px] ">Sign Up/Sign In</span>
-                                </Link>
+                                {
+                                    !userId ? (
+                                        <Link href={'/sign-in'} className="flex items-center gap-[6px]">
+                                            <FaRegUser size={16} color="#008ECC" />
+                                            <span className="text-[#666666] text-[13px] md:text-[14px] ">Sign Up/Sign In</span>
+                                        </Link>
+                                    ) : (
+                                        <UserButton afterSignOutUrl="/" />
+                                    )
+                                }
                                 <Link href={'/'} className="flex items-center gap-[6px] pl-[5px] md:pl-[20px]">
                                     <FaCartShopping size={16} color="#008ECC" />
                                     <span className="text-[#666666] text-[13px] md:text-[14px] ">Cart</span>
@@ -58,7 +67,7 @@ export default function Header() {
                         </label>
                     </div>
                 </header>
-                <Category withImage={false}/>
+                <Category withImage={false} />
             </div>
         </div>
     )
