@@ -1,0 +1,29 @@
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-custom img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+}

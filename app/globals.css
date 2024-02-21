@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --swiper-navigation-color: #008ecc;
+  --swiper-pagination-bullet-width: 13px;
+  --swiper-pagination-bullet-height: 13px;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  background-color: white;
+  color: #222222;
+}
+
+.custom-container {
+  max-width: 90%;
+  margin: 0px auto;
+}
+
+@media screen and (min-width: 768px) {
+  .custom-container {
+    max-width: 650px;
+  }
+}
+
+@media screen and (min-width: 850px) {
+  .custom-container {
+    max-width: 800px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .custom-container {
+    max-width: 950px;
+  }
+}
+
+@media screen and (min-width: 1330px) {
+  .custom-container {
+    max-width: 1200px;
+  }
+
+  .swiper-slide img {
+    object-fit: cover !important;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .custom-container {
+    max-width: 1350px;
+  }
+}
+
+@media screen and (min-width: 1660px) {
+  .custom-container {
+    max-width: 1440px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Slider Styles */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 300px !important;
+}
+
+.swiper-slide img {
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.autoplay-progress {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--swiper-theme-color);
+}
+
+.autoplay-progress svg {
+  --progress: 0;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  stroke-width: 4px;
+  stroke: var(--swiper-theme-color);
+  fill: none;
+  stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+  stroke-dasharray: 125.6;
+  transform: rotate(-90deg);
+}
+
+.counter {
+  color: rgb(255, 255, 255);
+}
+
+.starter {
+  @apply flex justify-between items-center border-b border-['#EDEDED'] pb-[16px]
+}
