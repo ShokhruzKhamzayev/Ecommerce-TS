@@ -3,10 +3,12 @@ import { FaTruck, FaRegUser } from "react-icons/fa";
 import { TbDiscountCheckFilled } from "react-icons/tb";
 import Link from "next/link";
 import Category from "./category";
-import { UserButton, auth } from '@clerk/nextjs'
+import { UserButton, auth, currentUser } from '@clerk/nextjs'
 
 export default async function Header() {
-    const { userId } = auth()
+    const { userId } =  auth()
+    const user = await currentUser()
+    console.log(user?.firstName )
     return (
         <div>
             <div className="till-header bg-[#F5F5F5] py-[14px] hidden lg:block">
